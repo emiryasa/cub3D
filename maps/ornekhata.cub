@@ -1,0 +1,15 @@
+SO ./textures/bayrak.xpm
+EA ./textures/harita.xpm
+NO ./textures/kusatma.xpm
+WE ./textures/metehan.xpm
+
+C 0,225,255
+F 2,255,100
+
+1111111111111
+1011111011111111
+11111111       1
+111111111111111
+11N11111111
+100000011111
+111111111111
