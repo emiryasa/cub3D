@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:57:22 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 20:54:57 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/02 20:44:44 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	get_free(t_game *list)
 int	close_game(t_game *list)
 {
 	mlx_destroy_image(list->mlx, list->img_ptr);
-	mlx_destroy_window(list->mlx, list->window);
+	mlx_destroy_window(list->mlx, list->win);
 	get_free(list);
 	exit (0);
 }

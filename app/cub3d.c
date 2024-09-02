@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:41:45 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 20:39:18 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/02 20:42:45 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	set_nulls(t_game *game)
 	game->f = NULL;
 	game->c = NULL;
 	game->mlx = NULL;
-	game->window = NULL;
+	game->win = NULL;
 	game->last_walls = NULL;
 	game->imgs.ea = NULL;
 	game->imgs.no = NULL;

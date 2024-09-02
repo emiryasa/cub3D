@@ -13,6 +13,7 @@ SRCS	=	app/cub3d.c							\
 			game_funcs/start.c					\
 			game_funcs/ft_atoi.c				\
 			game_funcs/create_map.c				\
+			game_funcs/raycasting.c				\
 
 
 OBJS	=	$(SRCS:.c=.o)

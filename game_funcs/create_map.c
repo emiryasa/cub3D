@@ -6,27 +6,19 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:58:04 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 20:54:58 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/02 20:40:34 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	grilled_draw(t_game *game)
+void	draw_scene(t_game *game, int x)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < game->y_cord * PIXEL)
-	{
-		x = 0;
-		while (x < PIXEL * game->x_cord)
-		{
-			if (x % PIXEL == 0 || y % PIXEL == 0)
-				game->wallpaper[x + y * game->x_cord * PIXEL] = DARK;
-			x++;
-		}
-		y++;
-	}
+    int i = 0;
+    while (i < game->ray->draw_end)
+    {
+        i++;
+    }
+    (void)x;
+    
 }

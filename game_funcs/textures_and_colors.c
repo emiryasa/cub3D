@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:22:10 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 21:01:48 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/02 18:01:16 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	get_coordinats(t_game *game)
 			cont = game->last_walls[i];
 	game->x_cord = cont;
 	game->y_cord = i;
-	game->player.rot_speed = 0.05;
-	game->player.move_speed = 0.05;
 }
 
 int	get_colors(t_game *game, int i, char **ccolor, char **fcolor)
