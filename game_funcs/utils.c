@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_position.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 18:23:56 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 20:54:23 by eyasa            ###   ########.fr       */
+/*   Created: 2024/09/03 19:31:41 by eyasa             #+#    #+#             */
+/*   Updated: 2024/09/03 20:11:31 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	get_position(t_game *game)
+void	ft_putstr_fd(char *str, int fd)
 {
 	int	i;
-	int	j;
 
-	i = -1;
-	while (game->map[++i])
+	i = 0;
+	while (str[i])
+		write(fd, &str[i++], 1);
+}
+
+void	*ft_calloc(size_t num_elements, size_t element_size)
+{
+	size_t	total_size;
+	void	*memory;
+	char	*ptr;
+	size_t	i;
+
+	total_size = num_elements * element_size;
+	memory = malloc(total_size);
+	if (!memory)
+		return (0);
+	else
 	{
-		j = -1;
-		while (game->map[i][++j])
+		ptr = (char *)memory;
+		i = 0;
+		while (i < total_size)
 		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'E'
-				|| game->map[i][j] == 'W' || game->map[i][j] == 'S')
-			{
-				game->player_x = (j * 156) + 78;
-				game->player_y = (i * 156) + 78;
-			}
+			ptr[i] = 0;
+			i++;
 		}
 	}
+	return (memory);
 }

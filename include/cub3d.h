@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:52:20 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/02 20:53:21 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@
 # include "stdlib.h"
 # include "unistd.h"
 
-# define PIXEL 96
-# define DARK 0x00000
-# define WHITE 0xFFFFFF
-
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define ROT_SPEED 0.09
-# define MOVE_SPEED 0.09
+# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.05
 # define KEY_W 13
 # define KEY_S 1
 # define KEY_A 0
@@ -38,6 +34,17 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_ESC 53
+
+typedef struct s_move
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+	int			shift;
+}				t_move;
 
 typedef struct s_imgs
 {
@@ -110,7 +117,7 @@ typedef struct s_game
 	char		direction;
 	void		*mlx;
 	void		*win;
-	void		*img_ptr;
+	void		*scene_ptr;
 	int			*scene;
 	int			*last_walls;
 	int			fd;
@@ -123,7 +130,8 @@ typedef struct s_game
 	t_ray		*ray;
 	t_imgs		imgs;
 	t_files		files;
-	t_player	player;
+	t_player	*player;
+	t_move		*move;
 }				t_game;
 
 t_game			*game_data_creats(char *av);
@@ -143,15 +151,13 @@ int				line_count(t_game *game);
 int				any_zero_in_outside(char **map);
 int				double_new_line(char *map);
 int				start(t_game *game);
-int				close_game(t_game *list);
+int				close_game(t_game *game, char *str);
 int				ft_atoi(const char *str);
 int				get_images(t_game *game);
 int				create_scene(t_game *game);
-int				keys(int key, t_game *game);
 
 void			get_free(t_game *list);
-void			set_nulls(t_game *game);
-void			get_position(t_game *game);
+void			move_player(t_game *game, double next_x, double next_y);
 void			rotate_player(t_game *game, double rot_speed);
 void			draw_scene(t_game *game, int x);
 
@@ -159,4 +165,7 @@ void			set_wall_texture(t_game *game);
 void			set_texture_coordinate(t_game *game);
 void			set_wall_coordinate(t_game *game);
 void			raycast(t_game *game);
+void			*ft_calloc(size_t num_elements, size_t element_size);
+void			ft_putstr_fd(char *str, int fd);
+
 #endif

@@ -1,94 +1,101 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freee.c                                            :+:      :+:    :+:   */
+/*   free_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:57:22 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/02 20:44:44 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	double_pointers_free(t_game	*list)
+static void	double_pointers_free(t_game *game)
 {
 	int	i;
 
 	i = -1;
-	if (list->map_values)
+	if (game->map_values)
 	{
-		while (list->map_values[++i])
-			free(list->map_values[i]);
-		free(list->map_values);
+		while (game->map_values[++i])
+			free(game->map_values[i]);
+		free(game->map_values);
 	}
 	i = -1;
-	if (list->map)
+	if (game->map)
 	{
-		while (list->map[++i])
-			free(list->map[i]);
-		free(list->map);
+		while (game->map[++i])
+			free(game->map[i]);
+		free(game->map);
 	}
 	i = -1;
-	if (list->map_temp)
+	if (game->map_temp)
 	{
-		while (list->map_temp[++i])
-			free(list->map_temp[i]);
-		free(list->map_temp);
+		while (game->map_temp[++i])
+			free(game->map_temp[i]);
+		free(game->map_temp);
 	}
 }
 
-void	list_imgs_free(t_game *list)
+void	game_imgs_free(t_game *game)
 {
-	if (list->imgs.so)
-		mlx_destroy_image(list->mlx, list->imgs.so);
-	if (list->imgs.no)
-		mlx_destroy_image(list->mlx, list->imgs.no);
-	if (list->imgs.ea)
-		mlx_destroy_image(list->mlx, list->imgs.ea);
-	if (list->imgs.we)
-		mlx_destroy_image(list->mlx, list->imgs.we);
+	if (game->imgs.so)
+		mlx_destroy_image(game->mlx, game->imgs.so);
+	if (game->imgs.no)
+		mlx_destroy_image(game->mlx, game->imgs.no);
+	if (game->imgs.ea)
+		mlx_destroy_image(game->mlx, game->imgs.ea);
+	if (game->imgs.we)
+		mlx_destroy_image(game->mlx, game->imgs.we);
 }
 
-static void	pointers_free(t_game *list)
+static void	pointers_free(t_game *game)
 {
-	if (list->temp)
-		free(list->temp);
-	if (list->no)
-		free(list->no);
-	if (list->we)
-		free(list->we);
-	if (list->so)
-		free(list->so);
-	if (list->ea)
-		free(list->ea);
-	if (list->f)
-		free(list->f);
-	if (list->c)
-		free(list->c);
-	if (list->last_walls)
-		free(list->last_walls);
-	if (list->fd)
-		close(list->fd);
-	list_imgs_free(list);
+	if (game->player)
+		free(game->player);
+	if (game->temp)
+		free(game->temp);
+	if (game->no)
+		free(game->no);
+	if (game->we)
+		free(game->we);
+	if (game->so)
+		free(game->so);
+	if (game->ea)
+		free(game->ea);
+	if (game->f)
+		free(game->f);
+	if (game->c)
+		free(game->c);
+	if (game->move)
+		free(game->move);
+	if (game->ray)
+		free(game->ray);
+	if (game->last_walls)
+		free(game->last_walls);
+	game_imgs_free(game);
 }
 
-void	get_free(t_game *list)
+void	get_free(t_game *game)
 {
-	if (list)
+	if (game)
 	{
-		double_pointers_free(list);
-		pointers_free(list);
-		free(list);
-		list = NULL;
+		double_pointers_free(game);
+		pointers_free(game);
+		free(game);
 	}
 }
 
-int	close_game(t_game *list)
+int	close_game(t_game *game, char *str)
 {
-	// mlx_destroy_image(list->mlx, list->img_ptr);
-	// mlx_destroy_window(list->mlx, list->win);
-	get_free(list);
-	exit (0);
+	if (str)
+		ft_putstr_fd(str, 2);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->scene_ptr)
+		mlx_destroy_image(game->mlx, game->scene_ptr);
+	get_free(game);
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:51:06 by eyasa             #+#    #+#             */
-/*   Updated: 2024/09/02 20:53:31 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/03 18:51:47 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	set_wall_coordinate(t_game *game)
 
 	ray = game->ray;
 	if (ray->side == 0)
-		ray->wall_x = game->player.player_y + ray->perp_wall_dist
+		ray->wall_x = game->player->player_y + ray->perp_wall_dist
 			* ray->ray_dir_y;
 	else
-		ray->wall_x = game->player.player_x + ray->perp_wall_dist
+		ray->wall_x = game->player->player_x + ray->perp_wall_dist
 			* ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	game->ray = ray;

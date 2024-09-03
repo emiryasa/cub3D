@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:22:10 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/02 18:01:16 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	create_scene(t_game *game)
 {
 	int	i;
 
-	game->img_ptr = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!game->img_ptr)
+	game->scene_ptr = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->scene_ptr)
 		return (1);
-	game->scene = (int *)mlx_get_data_addr(game->img_ptr, &i, &i, &i);
+	game->scene = (int *)mlx_get_data_addr(game->scene_ptr, &i, &i, &i);
 	if (!game->scene)
 		return (1);
 	return (0);
@@ -47,6 +47,9 @@ int	get_colors(t_game *game, int i, char **ccolor, char **fcolor)
 	fcolor = ft_split(game->f + 2, ',');
 	if (!fcolor)
 		return (-1);
+	while(ccolor[++i])
+		if (!ccolor[i] || !fcolor[i])
+			return (-1);
 	if (ft_atoi(ccolor[0]) == -1 || ft_atoi(ccolor[1]) == -1
 		|| ft_atoi(ccolor[2]) == -1 || ft_atoi(fcolor[0]) == -1
 		|| ft_atoi(fcolor[1]) == -1 || ft_atoi(fcolor[2]) == -1)

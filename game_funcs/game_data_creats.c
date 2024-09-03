@@ -6,7 +6,7 @@
 /*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:07:01 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 21:01:48 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/03 20:01:47 by eyasa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,26 @@ t_game	*game_data_creats(char *av)
 {
 	t_game	*game;
 
-	game = malloc(sizeof(t_game));
+	game = ft_calloc(1, sizeof(t_game));
 	if (!game)
-		return (NULL);
-	set_nulls(game);
-	if (ft_strlen(av) < 5 || file_name_control(av, ".cub") == -1)
-		return (get_free(game), NULL);
+		close_game(game, "Error\nMalloc\n");
+	if (ft_strlen(av) < 5 || file_name_control(av, ".cub"))
+		close_game(game, "Error\nInvalid file name\n");
 	game->fd = open(av, O_RDONLY, 0777);
 	if (game->fd == -1)
-		return (get_free(game), NULL);
+		close_game(game, "Error\nInvalid map name\n");
 	game->temp = ft_get_read(game->fd);
 	if (!game->temp)
-		return (get_free(game), NULL);
+		close_game(game, "Error\nInvalid map data\n");
 	if (double_new_line(game->temp) == -1)
-		return (get_free(game), NULL);
+		close_game(game, "Error\nInvalid map data\n");
 	game->map_values = ft_split(game->temp, '\n');
 	if (!(game->map_values) || ((ft_strcmp(game->map_values[0], "NO ./") == -1)
 			&& (ft_strcmp(game->map_values[0], "SO ./") == -1)
 			&& (ft_strcmp(game->map_values[0], "WE ./") == -1)
 			&& (ft_strcmp(game->map_values[0], "EA ./") == -1)))
-		return (get_free(game), NULL);
+		close_game(game, "Error\nInvalid direction data\n");
 	if (map_find(game->map_values, game) == -1)
-		return (get_free(game), NULL);
+		close_game(game, "Error\nInvalid direction data\n");
 	return (game);
 }

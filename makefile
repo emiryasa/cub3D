@@ -15,20 +15,22 @@ SRCS	=	app/cub3d.c							\
 			game_funcs/create_map.c				\
 			game_funcs/raycasting.c				\
 			game_funcs/ray_utils.c				\
+			game_funcs/utils.c					\
+			
 
 OBJS	=	$(SRCS:.c=.o)
 CFLAGS	=	-Wall -Wextra -Werror #-g -fsanitize=address
-NAME	=	cub3d
+NAME	=	cub3D
 MINI	=	mlx/libmlx.a
-MLXFLAG =  -L./mlx -lmlx -lX11 -lXext -lXrandr -lXi -lm -lGL
-
+MLXFLAG	=	-L./mlx -lmlx -framework AppKit -framework OpenGL
 all: $(NAME)
 
 $(MINI):
 	make -C mlx/
 
-$(NAME): $(OBJS) $(MINI)
-	gcc $(CFLAGS) $(OBJS) -o $(NAME) $(MLXFLAG)
+$(NAME): $(MINI) $(OBJS)
+	gcc $(CFLAGS) $(MLXFLAG) $(OBJS) -o $(NAME)
+	make clean
 
 clean:
 	rm -rf $(OBJS)
