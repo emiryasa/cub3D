@@ -14,11 +14,27 @@
 
 void	draw_scene(t_game *game, int x)
 {
-    int i = 0;
-    while (i < game->ray->draw_end)
-    {
-        i++;
-    }
-    (void)x;
-    
+	t_ray	*ray;
+	int		y;
+
+	ray = game->ray;
+	ray->step = 1.0 * TEX_HEIGHT / ray->line_height;
+	ray->tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)
+		* ray->step;
+	y = -1;
+	while (++y <= ray->draw_start)
+		game->scene[y * WIN_WIDTH + x] = game->f_color;
+	while (y < ray->draw_end)
+	{
+		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
+		ray->tex_pos += ray->step;
+		ray->color = ray->texture[TEX_HEIGHT * ray->tex_y + ray->tex_x];
+		game->scene[y * WIN_WIDTH + x] = ray->color;
+		y++;
+	}
+	while (y < WIN_HEIGHT)
+	{
+		game->scene[y * WIN_WIDTH + x] = game->c_color;
+		y++;
+	}
 }

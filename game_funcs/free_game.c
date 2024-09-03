@@ -49,14 +49,6 @@ void	list_imgs_free(t_game *list)
 		mlx_destroy_image(list->mlx, list->imgs.ea);
 	if (list->imgs.we)
 		mlx_destroy_image(list->mlx, list->imgs.we);
-	// if (list->imgs.ea_addr)
-	// 	free(list->imgs.ea_addr);
-	// if (list->imgs.no_addr)
-	// 	free(list->imgs.no_addr);
-	// if (list->imgs.so_addr)
-	// 	free(list->imgs.so_addr);
-	// if (list->imgs.we_addr)
-	// 	free(list->imgs.we_addr);
 }
 
 static void	pointers_free(t_game *list)
@@ -91,13 +83,12 @@ void	get_free(t_game *list)
 		free(list);
 		list = NULL;
 	}
-	//system("leaks cub3d");
 }
 
 int	close_game(t_game *list)
 {
-	mlx_destroy_image(list->mlx, list->img_ptr);
-	mlx_destroy_window(list->mlx, list->win);
+	// mlx_destroy_image(list->mlx, list->img_ptr);
+	// mlx_destroy_window(list->mlx, list->win);
 	get_free(list);
 	exit (0);
 }

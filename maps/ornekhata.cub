@@ -3,8 +3,8 @@ EA ./textures/harita.xpm
 NO ./textures/kusatma.xpm
 WE ./textures/metehan.xpm
 
-C 0,225,255
-F 2,255,100
+C 2,255,100
+F 0,225,255
 
 1111111111111
 1011111011111111

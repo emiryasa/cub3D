@@ -12,32 +12,17 @@
 
 #include "../include/cub3d.h"
 
-int	create_wallpaper(t_game *game)
+int	create_scene(t_game *game)
 {
 	int	i;
-	int	j;
 
-	game->img_ptr = mlx_new_image(game->mlx, game->x_cord * PIXEL,
-			game->y_cord * PIXEL);
+	game->img_ptr = mlx_new_image(game->mlx, game->x_cord * PIXEL, game->y_cord
+			* PIXEL);
 	if (!(game->img_ptr))
 		return (-1);
-	game->wallpaper = (int *)mlx_get_data_addr(game->img_ptr, &i, &i, &i);
-	if (!(game->wallpaper))
+	game->scene = (int *)mlx_get_data_addr(game->img_ptr, &i, &i, &i);
+	if (!(game->scene))
 		return (-1);
-	i = -1;
-	while (++i < (game->y_cord * PIXEL) / 2)
-	{
-		j = -1;
-		while (++j < game->x_cord * PIXEL)
-			game->wallpaper[j + i * game->x_cord * PIXEL] = game->c_color;
-	}
-	i--;
-	while (++i < game->y_cord * PIXEL)
-	{
-		j = -1;
-		while (++j < game->x_cord * PIXEL)
-			game->wallpaper[j + i * game->x_cord * PIXEL] = game->f_color;
-	}
 	return (0);
 }
 
@@ -67,10 +52,8 @@ int	get_colors(t_game *game, int i, char **ccolor, char **fcolor)
 		|| ft_atoi(ccolor[2]) == -1 || ft_atoi(fcolor[0]) == -1
 		|| ft_atoi(fcolor[1]) == -1 || ft_atoi(fcolor[2]) == -1)
 		return (-1);
-	game->c_color = (ft_atoi(ccolor[0]) << 16)
-		| (ft_atoi(ccolor[1]) << 8) | ft_atoi(ccolor[2]);
-	game->f_color = (ft_atoi(fcolor[0]) << 16)
-		| (ft_atoi(fcolor[1]) << 8) | ft_atoi(fcolor[2]);
+	game->c_color = (ft_atoi(ccolor[0]) << 16) | (ft_atoi(ccolor[1]) << 8) | ft_atoi(ccolor[2]);
+	game->f_color = (ft_atoi(fcolor[0]) << 16) | (ft_atoi(fcolor[1]) << 8) | ft_atoi(fcolor[2]);
 	i = -1;
 	while (ccolor[++i])
 		free(ccolor[i]);
@@ -99,10 +82,10 @@ int	can_we_open_files(t_game *game)
 	if (game->files.east == -1 || game->files.north == -1
 		|| game->files.south == -1 || game->files.west == -1)
 		return (-1);
-	close (game->files.east);
-	close (game->files.north);
-	close (game->files.south);
-	close (game->files.west);
+	close(game->files.east);
+	close(game->files.north);
+	close(game->files.south);
+	close(game->files.west);
 	if (get_colors(game, i, ccolor, fcolor) == -1)
 		return (-1);
 	return (0);
@@ -129,8 +112,8 @@ int	give_me_textures_and_colors(char **map, t_game *game)
 			game->c = ft_strdup(map[i]);
 		i++;
 	}
-	if (!(game->no) || !(game->so) || !(game->ea)
-		|| !(game->we) || !(game->c) || !(game->f))
+	if (!(game->no) || !(game->so) || !(game->ea) || !(game->we) || !(game->c)
+		|| !(game->f))
 		return (-1);
 	if (can_we_open_files(game) == -1)
 		return (-1);

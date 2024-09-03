@@ -17,9 +17,9 @@ void		set_player_direction(t_game *game, char dir);
 
 int	keys(int key, t_game *game)
 {
-	if (key == 53)
+	if (key == 65307)
 		return (close_game(game));
-	if (key == 2 || key == 0 || key == 1 || key == 13)
+	if (key == 119 || key == 97 || key == 115 || key == 100)
 		move_player(game, key);
 	if (key == 123)
 		rotate_player(game, -ROT_SPEED);
@@ -103,22 +103,22 @@ void	set_player_direction(t_game *game, char dir)
 
 static void	move_player(t_game *game, int key)
 {
-	if (key == 13)
+	if (key == 119)
 	{
 		game->player.player_x += game->player.dir_x * MOVE_SPEED;
 		game->player.player_y += game->player.dir_y * MOVE_SPEED;
 	}
-	if (key == 1)
+	if (key == 115)
 	{
 		game->player.player_x -= game->player.dir_x * MOVE_SPEED;
 		game->player.player_y -= game->player.dir_y * MOVE_SPEED;
 	}
-	if (key == 0)
+	if (key == 97)
 	{
 		game->player.player_x += game->player.dir_y * MOVE_SPEED;
 		game->player.player_y -= game->player.dir_x * MOVE_SPEED;
 	}
-	if (key == 2)
+	if (key == 100)
 	{
 		game->player.player_x -= game->player.dir_y * MOVE_SPEED;
 		game->player.player_y += game->player.dir_x * MOVE_SPEED;

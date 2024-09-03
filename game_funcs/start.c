@@ -17,12 +17,14 @@ int	main_loop(void *p)
 	t_game	*game;
 
 	game = (t_game *)p;
+	raycast(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_ptr, 0, 0);
 	return (0);
 }
 
 int	mlx_start(t_game *game)
 {
+	game->ray = (t_ray *)malloc(sizeof(t_ray));
 	mlx_hook(game->win, 17, 2, close_game, game);
 	mlx_hook(game->win, 2, 1L << 0, keys, game);
 	mlx_loop_hook(game->mlx, main_loop, game);
@@ -34,17 +36,15 @@ int	start(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (-1);
+		return (printf("error"),-1);
 	game->win = mlx_new_window(game->mlx, PIXEL * game->x_cord,
 			PIXEL * game->y_cord, "Cub3D");
 	if (!game->win)
 		return (-1);
-	if (get_images(game) == -1)
+	if (get_images(game))
 		return (-1);
 	get_position(game);
-	if (create_wallpaper(game) == -1)
-		return (-1);
-	if (!(game->wallpaper))
+	if (create_scene(game))
 		return (-1);
 	if (mlx_start(game) == -1)
 		return (-1);

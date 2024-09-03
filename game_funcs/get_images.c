@@ -24,13 +24,13 @@ int	get_images(t_game *game)
 	game->imgs.no = mlx_xpm_file_to_image(game->mlx, game->no + 3, &x, &y);
 	if (!(game->imgs.ea) || !(game->imgs.we) || !(game->imgs.so)
 		|| !(game->imgs.no))
-		return (-1);
+		return (1);
 	game->imgs.ea_addr = mlx_get_data_addr(game->imgs.ea, &x, &y, &z);
 	game->imgs.we_addr = mlx_get_data_addr(game->imgs.we, &x, &y, &z);
 	game->imgs.so_addr = mlx_get_data_addr(game->imgs.so, &x, &y, &z);
 	game->imgs.no_addr = mlx_get_data_addr(game->imgs.no, &x, &y, &z);
 	if (!(game->imgs.ea_addr) || !(game->imgs.no_addr) || !(game->imgs.we_addr)
 		|| !(game->imgs.so_addr))
-		return (-1);
+		return (1);
 	return (0);
 }

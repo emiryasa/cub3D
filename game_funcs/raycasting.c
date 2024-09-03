@@ -90,7 +90,7 @@ static void	calculate_wall_height(t_game *game, int mapX, int mapY)
 		game->ray->draw_end = WIN_HEIGHT - 1;
 }
 
-void	raycasting(t_game *game)
+void	raycast(t_game *game)
 {
 	int	x;
 	int	map_x;
@@ -110,5 +110,5 @@ void	raycasting(t_game *game)
 		set_wall_texture(game);
 		draw_scene(game, x);
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->wallpaper, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->scene, 0, 0);
 }

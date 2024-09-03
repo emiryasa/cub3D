@@ -111,7 +111,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	void		*img_ptr;
-	int			*wallpaper;
+	int			*scene;
 	int			*last_walls;
 	int			fd;
 	int			f_color;
@@ -146,15 +146,17 @@ int				start(t_game *game);
 int				close_game(t_game *list);
 int				ft_atoi(const char *str);
 int				get_images(t_game *game);
-int				create_wallpaper(t_game *game);
+int				create_scene(t_game *game);
 int				keys(int key, t_game *game);
-int				raycast(t_game *game);
 
 void			get_free(t_game *list);
 void			set_nulls(t_game *game);
-void			grilled_draw(t_game *game);
 void			get_position(t_game *game);
 void			rotate_player(t_game *game, double rot_speed);
 void			draw_scene(t_game *game, int x);
 
+void			set_wall_texture(t_game *game);
+void			set_texture_coordinate(t_game *game);
+void			set_wall_coordinate(t_game *game);
+void			raycast(t_game *game);
 #endif

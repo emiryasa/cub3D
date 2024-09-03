@@ -47,6 +47,7 @@ char	*ft_get_read(int fd)
 
 	liner = malloc(41);
 	rd = 1;
+	str = NULL;
 	if (!liner)
 		return (NULL);
 	while (rd > 0)
