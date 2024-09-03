@@ -16,13 +16,12 @@ int	create_scene(t_game *game)
 {
 	int	i;
 
-	game->img_ptr = mlx_new_image(game->mlx, game->x_cord * PIXEL, game->y_cord
-			* PIXEL);
-	if (!(game->img_ptr))
-		return (-1);
+	game->img_ptr = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->img_ptr)
+		return (1);
 	game->scene = (int *)mlx_get_data_addr(game->img_ptr, &i, &i, &i);
-	if (!(game->scene))
-		return (-1);
+	if (!game->scene)
+		return (1);
 	return (0);
 }
 

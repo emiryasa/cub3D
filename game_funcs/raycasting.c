@@ -97,6 +97,9 @@ void	raycast(t_game *game)
 	int	map_y;
 
 	x = -1;
+	printf("%f\n", game->player.player_x);
+	printf("%f\n", game->player.player_y);
+	printf("%d\n", game->ray->draw_start);
 	while (++x < WIN_WIDTH)
 	{
 		set_camera(game, x);
@@ -108,7 +111,8 @@ void	raycast(t_game *game)
 		set_wall_coordinate(game);
 		set_texture_coordinate(game);
 		set_wall_texture(game);
+		printf("%d\n", game->ray->draw_start);
 		draw_scene(game, x);
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->scene, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->img_ptr, 0, 0);
 }

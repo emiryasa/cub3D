@@ -3,3 +3,4 @@
 *.a
 cub3d
 .DS_Store
+mlx

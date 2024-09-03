@@ -23,7 +23,7 @@ void	draw_scene(t_game *game, int x)
 		* ray->step;
 	y = -1;
 	while (++y <= ray->draw_start)
-		game->scene[y * WIN_WIDTH + x] = game->f_color;
+		game->scene[y * WIN_WIDTH + x] = game->c_color;
 	while (y < ray->draw_end)
 	{
 		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
@@ -34,7 +34,7 @@ void	draw_scene(t_game *game, int x)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		game->scene[y * WIN_WIDTH + x] = game->c_color;
+		game->scene[y * WIN_WIDTH + x] = game->f_color;
 		y++;
 	}
 }

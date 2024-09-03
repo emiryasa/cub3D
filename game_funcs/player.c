@@ -13,7 +13,6 @@
 #include "../include/cub3d.h"
 
 static void	move_player(t_game *game, int key);
-void		set_player_direction(t_game *game, char dir);
 
 int	keys(int key, t_game *game)
 {
@@ -25,8 +24,6 @@ int	keys(int key, t_game *game)
 		rotate_player(game, -ROT_SPEED);
 	if (key == 124)
 		rotate_player(game, ROT_SPEED);
-	mlx_clear_window(game->mlx, game->win);
-	mlx_put_image_to_window(game->mlx, game->win, game->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -63,41 +60,8 @@ void	get_position(t_game *game)
 			{
 				game->player.player_x = j;
 				game->player.player_y = i;
-				set_player_direction(game, game->map[i][j]);
 			}
 		}
-	}
-}
-
-void	set_player_direction(t_game *game, char dir)
-{
-	if (dir == 'N')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = -1;
-		game->player.plane_x = 0.66;
-		game->player.plane_y = 0;
-	}
-	else if (dir == 'S')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = 1;
-		game->player.plane_x = -0.66;
-		game->player.plane_y = 0;
-	}
-	else if (dir == 'E')
-	{
-		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
-		game->player.plane_y = 0.66;
-	}
-	else if (dir == 'W')
-	{
-		game->player.dir_x = -1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
-		game->player.plane_y = -0.66;
 	}
 }
 
@@ -123,6 +87,4 @@ static void	move_player(t_game *game, int key)
 		game->player.player_x -= game->player.dir_y * MOVE_SPEED;
 		game->player.player_y += game->player.dir_x * MOVE_SPEED;
 	}
-	mlx_clear_window(game->mlx, game->win);
-	mlx_put_image_to_window(game->mlx, game->win, game->img_ptr, 0, 0);
 }

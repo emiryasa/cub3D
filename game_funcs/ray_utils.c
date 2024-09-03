@@ -18,13 +18,13 @@ void	set_wall_texture(t_game *game)
 
 	ray = game->ray;
 	if (ray->side == 0 && ray->ray_dir_x > 0)
-		ray->texture = (int *)game->imgs.we_addr;
+		ray->texture = game->imgs.we_addr;
 	else if (ray->side == 0 && ray->ray_dir_x < 0)
-		ray->texture = (int *)game->imgs.ea_addr;
+		ray->texture = game->imgs.ea_addr;
 	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		ray->texture = (int *)game->imgs.no_addr;
+		ray->texture = game->imgs.no_addr;
 	else
-		ray->texture = (int *)game->imgs.so_addr;
+		ray->texture = game->imgs.so_addr;
 	game->ray = ray;
 }
 

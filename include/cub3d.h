@@ -45,10 +45,10 @@ typedef struct s_imgs
 	void		*we;
 	void		*no;
 	void		*so;
-	char		*no_addr;
-	char		*so_addr;
-	char		*ea_addr;
-	char		*we_addr;
+	int			*no_addr;
+	int			*so_addr;
+	int			*ea_addr;
+	int			*we_addr;
 }				t_imgs;
 
 typedef struct s_files

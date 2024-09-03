@@ -39,21 +39,29 @@ void	set_direction(t_game *game)
 	{
 		game->player.dir_x = 0;
 		game->player.dir_y = -1;
+		game->player.plane_x = 0.66;
+		game->player.plane_y = 0;
 	}
 	else if (game->direction == 'S')
 	{
 		game->player.dir_x = 0;
 		game->player.dir_y = 1;
+		game->player.plane_x = -0.66;
+		game->player.plane_y = 0;
 	}
 	else if (game->direction == 'E')
 	{
 		game->player.dir_x = 1;
 		game->player.dir_y = 0;
+		game->player.plane_x = 0;
+		game->player.plane_y = 0.66;
 	}
 	else if (game->direction == 'W')
 	{
 		game->player.dir_x = -1;
 		game->player.dir_y = 0;
+		game->player.plane_x = 0;
+		game->player.plane_y = -0.66;
 	}
 }
 
