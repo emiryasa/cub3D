@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_and_colors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:22:10 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:42:31 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,43 +39,35 @@ void	get_coordinats(t_game *game)
 	game->y_cord = i;
 }
 
-int	get_colors(t_game *game, int i, char **ccolor, char **fcolor)
+int	get_colors(t_game *game, int i)
 {
-	ccolor = ft_split(game->c + 2, ',');
-	if (!ccolor)
-		return (-1);
-	fcolor = ft_split(game->f + 2, ',');
-	if (!fcolor)
-		return (-1);
-	while(ccolor[++i])
-		if (!ccolor[i] || !fcolor[i])
-			return (-1);
-	if (ft_atoi(ccolor[0]) == -1 || ft_atoi(ccolor[1]) == -1
-		|| ft_atoi(ccolor[2]) == -1 || ft_atoi(fcolor[0]) == -1
-		|| ft_atoi(fcolor[1]) == -1 || ft_atoi(fcolor[2]) == -1)
-		return (-1);
-	game->c_color = (ft_atoi(ccolor[0]) << 16) | (ft_atoi(ccolor[1]) << 8) | ft_atoi(ccolor[2]);
-	game->f_color = (ft_atoi(fcolor[0]) << 16) | (ft_atoi(fcolor[1]) << 8) | ft_atoi(fcolor[2]);
-	i = -1;
-	while (ccolor[++i])
-		free(ccolor[i]);
-	free(ccolor);
-	i = -1;
-	while (fcolor[++i])
-		free(fcolor[i]);
-	free(fcolor);
+	game->ccolor = ft_split(game->c + 2, ',');
+	if (!game->ccolor)
+		close_game(game, "Error\nInvalid rgb value\n", 1);
+	game->fcolor = ft_split(game->f + 2, ',');
+	if (!game->fcolor)
+		close_game(game, "Error\nInvalid rgb value\n", 1);
+	while (game->ccolor[++i])
+		if (!game->ccolor[i] || !game->fcolor[i])
+			close_game(game, "Error\nInvalid rgb value\n", 1);
+	if (ft_atoi(game->ccolor[0]) == -1 || ft_atoi(game->ccolor[1]) == -1
+		|| ft_atoi(game->ccolor[2]) == -1 || ft_atoi(game->fcolor[0]) == -1
+		|| ft_atoi(game->fcolor[1]) == -1 || ft_atoi(game->fcolor[2]) == -1)
+		close_game(game, "Error\nInvalid rgb value\n", 1);
+	if (control_fc(game) == -1)
+		close_game(game, "Error\nInvalid rgb value\n", 1);
+	game->c_color = (ft_atoi(game->ccolor[0]) << 16)
+		| (ft_atoi(game->ccolor[1]) << 8) | ft_atoi(game->ccolor[2]);
+	game->f_color = (ft_atoi(game->fcolor[0]) << 16)
+		| (ft_atoi(game->fcolor[1]) << 8) | ft_atoi(game->fcolor[2]);
 	get_coordinats(game);
 	return (0);
 }
 
 int	can_we_open_files(t_game *game)
 {
-	char	**ccolor;
-	char	**fcolor;
 	int		i;
 
-	ccolor = NULL;
-	fcolor = NULL;
 	i = -1;
 	game->files.east = open((game->ea + 3), O_RDONLY, 0777);
 	game->files.north = open((game->no + 3), O_RDONLY, 0777);
@@ -83,13 +75,13 @@ int	can_we_open_files(t_game *game)
 	game->files.west = open((game->we + 3), O_RDONLY, 0777);
 	if (game->files.east == -1 || game->files.north == -1
 		|| game->files.south == -1 || game->files.west == -1)
-		return (-1);
+		close_game(game, "Error\nFile not found\n", 1);
 	close(game->files.east);
 	close(game->files.north);
 	close(game->files.south);
 	close(game->files.west);
-	if (get_colors(game, i, ccolor, fcolor) == -1)
-		return (-1);
+	if (get_colors(game, i) == -1)
+		close_game(game, "Error\nInvalid rgb value\n", 1);
 	return (0);
 }
 
@@ -116,8 +108,8 @@ int	give_me_textures_and_colors(char **map, t_game *game)
 	}
 	if (!(game->no) || !(game->so) || !(game->ea) || !(game->we) || !(game->c)
 		|| !(game->f))
-		return (-1);
+		close_game(game, "Error\nInvalid map data\n", 1);
 	if (can_we_open_files(game) == -1)
-		return (-1);
+		close_game(game, "Error\nInvalid map data\n", 1);
 	return (0);
 }

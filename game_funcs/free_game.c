@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:57:22 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:42:43 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,32 @@ static void	pointers_free(t_game *game)
 
 void	get_free(t_game *game)
 {
+	int	i;
+
 	if (game)
 	{
 		double_pointers_free(game);
+		i = -1;
+		if (game->fcolor)
+		{
+			while (game->fcolor[++i])
+				free(game->fcolor[i]);
+			free(game->fcolor);
+		}
+		i = -1;
+		if (game->ccolor)
+		{
+			while (game->ccolor[++i])
+				free(game->ccolor[i]);
+			free(game->ccolor);
+		}
 		pointers_free(game);
 		free(game);
 	}
 }
 
-int	close_game(t_game *game, char *str)
+int	exit_game(t_game *game)
 {
-	if (str)
-		ft_putstr_fd(str, 2);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->scene_ptr)
-		mlx_destroy_image(game->mlx, game->scene_ptr);
-	get_free(game);
-	exit(1);
+	close_game(game, NULL, 0);
+	return (0);
 }

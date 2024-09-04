@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_continue.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:27:54 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/01 21:09:35 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 15:49:39 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	any_zero_in_outside(char **map)
 		{
 			if (control(map, i, j) == -1)
 				return (-1);
-			if (map[i][j] == '0' && ((!map[i + 1] || !map[i + 1][j]) || (!map[i
-						- 1] || !map[i - 1][j])))
+			if (map[i][j] == '0' && ((!map[i + 1] || !map[i + 1][j])
+				|| (!map[i - 1] || !map[i - 1][j])))
 				return (-1);
 		}
 	}

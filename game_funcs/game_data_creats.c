@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_data_creats.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:07:01 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:01:47 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:34:41 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,24 @@ t_game	*game_data_creats(char *av)
 
 	game = ft_calloc(1, sizeof(t_game));
 	if (!game)
-		close_game(game, "Error\nMalloc\n");
+		close_game(game, "Error\nMalloc\n", 1);
 	if (ft_strlen(av) < 5 || file_name_control(av, ".cub"))
-		close_game(game, "Error\nInvalid file name\n");
+		close_game(game, "Error\nInvalid file name\n", 1);
 	game->fd = open(av, O_RDONLY, 0777);
 	if (game->fd == -1)
-		close_game(game, "Error\nInvalid map name\n");
+		close_game(game, "Error\nInvalid map name\n", 1);
 	game->temp = ft_get_read(game->fd);
 	if (!game->temp)
-		close_game(game, "Error\nInvalid map data\n");
+		close_game(game, "Error\nInvalid map data\n", 1);
 	if (double_new_line(game->temp) == -1)
-		close_game(game, "Error\nInvalid map data\n");
+		close_game(game, "Error\nInvalid map data\n", 1);
 	game->map_values = ft_split(game->temp, '\n');
 	if (!(game->map_values) || ((ft_strcmp(game->map_values[0], "NO ./") == -1)
 			&& (ft_strcmp(game->map_values[0], "SO ./") == -1)
 			&& (ft_strcmp(game->map_values[0], "WE ./") == -1)
 			&& (ft_strcmp(game->map_values[0], "EA ./") == -1)))
-		close_game(game, "Error\nInvalid direction data\n");
+		close_game(game, "Error\nInvalid direction data\n", 1);
 	if (map_find(game->map_values, game) == -1)
-		close_game(game, "Error\nInvalid direction data\n");
+		close_game(game, "Error\nInvalid direction data\n", 1);
 	return (game);
 }

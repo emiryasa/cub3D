@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:32:29 by eyasa             #+#    #+#             */
-/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 14:36:33 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	set_camera(t_game *game, int x)
 {
-	game->ray->cameraX = 2 * x / (double)WIN_WIDTH - 1;
+	game->ray->camerax = 2 * x / (double)WIN_WIDTH - 1;
 	game->ray->ray_dir_x = game->player->dir_x + game->player->plane_x
-		* game->ray->cameraX;
+		* game->ray->camerax;
 	game->ray->ray_dir_y = game->player->dir_y + game->player->plane_y
-		* game->ray->cameraX;
+		* game->ray->camerax;
 	game->ray->delta_dist_x = fabs(1 / game->ray->ray_dir_x);
 	game->ray->delta_dist_y = fabs(1 / game->ray->ray_dir_y);
 }

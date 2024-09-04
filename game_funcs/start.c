@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 15:45:36 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:26:22 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:38:18 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	key_press(int keycode, void *param)
 
 	game = (t_game *)param;
 	if (keycode == KEY_ESC)
-		close_game(game, NULL);
+		close_game(game, NULL, 0);
 	else if (keycode == KEY_W)
 		game->move->w = 1;
 	else if (keycode == KEY_S)
@@ -61,27 +61,28 @@ int	key_hook(void *param)
 	game = (t_game *)param;
 	mlx_clear_window(game->mlx, game->win);
 	if (game->move->w)
-		move_player(game, game->player->dir_x * MOVE_SPEED, game->player->dir_y * MOVE_SPEED);
+		move_player(game, game->player->dir_x * MOVE_SPEED,
+			game->player->dir_y * MOVE_SPEED);
 	if (game->move->s)
 		move_player(game, -(game->player->dir_x * MOVE_SPEED),
 			-(game->player->dir_y * MOVE_SPEED));
 	if (game->move->a)
+		move_player(game, -(game->player->dir_y * MOVE_SPEED),
+			(game->player->dir_x * MOVE_SPEED));
+	if (game->move->d)
 		move_player(game, (game->player->dir_y * MOVE_SPEED),
 			-(game->player->dir_x * MOVE_SPEED));
-	if (game->move->d)
-		move_player(game, -(game->player->dir_y * MOVE_SPEED), (game->player->dir_x
-				* MOVE_SPEED));
 	if (game->move->right)
-		rotate_player(game, ROT_SPEED);
-	if (game->move->left)
 		rotate_player(game, -ROT_SPEED);
+	if (game->move->left)
+		rotate_player(game, ROT_SPEED);
 	raycast(game);
 	return (0);
 }
 
 int	mlx_start(t_game *game)
 {
-	mlx_hook(game->win, 17, 2, close_game, game);
+	mlx_hook(game->win, 17, 2, exit_game, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_loop_hook(game->mlx, key_hook, game);
@@ -93,19 +94,18 @@ int	start(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (-1);
+		close_game(game, "Error\nMalloc\n", 1);
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	if (!game->win)
-		return (-1);
+		close_game(game, "Error\nMalloc\n", 1);
 	if (get_images(game))
-		return (-1);
+		close_game(game, "Error\nXpm file error", 1);
 	if (create_scene(game))
-		return (-1);
+		close_game(game, "Error\nImage error", 1);
 	game->ray = ft_calloc(1, sizeof(t_ray));
 	game->move = ft_calloc(1, sizeof(t_move));
 	if (!game->ray)
-		return (-1);
-	if (mlx_start(game) == -1)
-		return (-1);
+		close_game(game, "Error\nMalloc\n", 1);
+	mlx_start(game);
 	return (0);
 }

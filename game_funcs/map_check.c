@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:45:27 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:18:43 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:21:49 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	last_wall(t_game *game)
 {
 	int	i;
 	int	j;
-	int	*walls;
 
 	i = 0;
-	walls = (int *)malloc(sizeof(int) * (line_count(game) + 1));
-	if (!(walls))
+	game->last_walls = (int *)ft_calloc(1, sizeof(int)
+			* (line_count(game) + 1));
+	if (!(game->last_walls))
 		return (-1);
 	while (game->map_temp[i])
 	{
@@ -37,12 +37,11 @@ int	last_wall(t_game *game)
 			j++;
 		j--;
 		if (game->map_temp[i][j] != '1')
-			return (free(walls), 1);
-		walls[i] = j;
+			return (-1);
+		game->last_walls[i] = j;
 		i++;
 	}
-	walls[i] = 0;
-	game->last_walls = walls;
+	game->last_walls[i] = 0;
 	return (0);
 }
 
@@ -90,7 +89,6 @@ int	map_check(char **map, t_game *game)
 			j++;
 		}
 	}
-	last_wall(game);
 	if (last_wall(game))
 		return (-1);
 	if (f_giver(game))

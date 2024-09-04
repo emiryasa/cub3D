@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_name_control.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 18:40:59 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:01:42 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 13:55:23 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	file_name_control(char *s1, char *s2)
 	{
 		i--;
 		j--;
-		if (j )
+		if (j)
 			return (0);
 	}
 	fd = open(s1, O_RDONLY, 0777);

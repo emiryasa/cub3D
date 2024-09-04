@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 20:51:06 by eyasa             #+#    #+#             */
-/*   Updated: 2024/09/03 18:51:47 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 13:57:06 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_texture_coordinate(t_game *game)
 
 void	set_wall_coordinate(t_game *game)
 {
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = game->ray;
 	if (ray->side == 0)

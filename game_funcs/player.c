@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 18:23:56 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 19:26:44 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 13:56:56 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void	rotate_player(t_game *game, double rot_speed)
 	game->player->plane_y = old_plane_x * sin(rot_speed) + game->player->plane_y
 		* cos(rot_speed);
 }
-

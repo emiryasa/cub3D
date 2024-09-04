@@ -16,29 +16,33 @@ SRCS	=	app/cub3d.c							\
 			game_funcs/raycasting.c				\
 			game_funcs/ray_utils.c				\
 			game_funcs/utils.c					\
-			
+
 
 OBJS	=	$(SRCS:.c=.o)
-CFLAGS	=	-Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror
 NAME	=	cub3D
 MINI	=	mlx/libmlx.a
 MLXFLAG	=	-L./mlx -lmlx -framework AppKit -framework OpenGL
 all: $(NAME)
 
+
 $(MINI):
+	curl -O https://cdn.intra.42.fr/document/document/18344/minilibx_opengl.tgz
+	tar -xvf minilibx_opengl.tgz
+	mv minilibx_opengl_20191021 mlx
+	rm -f minilibx_opengl.tgz
 	make -C mlx/
 
 $(NAME): $(MINI) $(OBJS)
 	gcc $(CFLAGS) $(MLXFLAG) $(OBJS) -o $(NAME)
-	make clean
 
 clean:
 	rm -rf $(OBJS)
-#	make clean -C mlx/
+	make clean -C mlx/
 
 fclean: clean
 	rm -rf $(NAME)
-#	make clean -C mlx/
+	rm -rf mlx
 
 re: fclean $(NAME)
 

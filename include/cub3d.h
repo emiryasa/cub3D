@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eyasa <eyasa@student.42istanbul.com.tr>    +#+  +:+       +#+        */
+/*   By: fekiz <fekiz@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:52:20 by fekiz             #+#    #+#             */
-/*   Updated: 2024/09/03 20:25:31 by eyasa            ###   ########.fr       */
+/*   Updated: 2024/09/04 16:42:10 by fekiz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_ray
 	int			color;
 	double		wall_x;
 	double		step;
-	double		cameraX;
+	double		camerax;
 }				t_ray;
 
 typedef struct s_player
@@ -104,6 +104,8 @@ typedef struct s_player
 
 typedef struct s_game
 {
+	char		**ccolor;
+	char		**fcolor;
 	char		**map_values;
 	char		**map;
 	char		**map_temp;
@@ -151,10 +153,11 @@ int				line_count(t_game *game);
 int				any_zero_in_outside(char **map);
 int				double_new_line(char *map);
 int				start(t_game *game);
-int				close_game(t_game *game, char *str);
+int				close_game(t_game *game, char *str, int x);
 int				ft_atoi(const char *str);
 int				get_images(t_game *game);
 int				create_scene(t_game *game);
+int				control_fc(t_game *game);
 
 void			get_free(t_game *list);
 void			move_player(t_game *game, double next_x, double next_y);
@@ -167,5 +170,6 @@ void			set_wall_coordinate(t_game *game);
 void			raycast(t_game *game);
 void			*ft_calloc(size_t num_elements, size_t element_size);
 void			ft_putstr_fd(char *str, int fd);
+int				exit_game(t_game *game);
 
 #endif
